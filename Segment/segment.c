@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <GL/glut.h>
-#include "segment.h"
+#include "header.h"
 
 // fonction du tracer du segment
 void segment(int xa,int ya,int xb,int yb,Color color)
