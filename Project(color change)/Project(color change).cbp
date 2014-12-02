@@ -42,7 +42,26 @@
 			<Add library="gdi32" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/lib" />
 		</Linker>
-		<Unit filename="main.cpp" />
+		<Unit filename="circle.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="circle.h" />
+		<Unit filename="color.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="color.h" />
+		<Unit filename="header.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="segment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="segment.h" />
+		<Unit filename="square.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="square.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

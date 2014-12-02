@@ -1,99 +1,120 @@
-#include <windows.h>
-#include <GL/glut.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "segment.h"
+#include "header.h"
 
-int xa,ya,xb,yb,inc;        // declaration des entiers
-int firstRound=1,click=0;   // initialisation de l'octant et du clic
-Color color;              // declaration de la couleur
+Shape shapes[100];
+int i=0,maxi=0;
+int xa,ya,xb,yb,inc,xt,yt;
+int x0,y0;
+int firstRound=1,click=0,redisplay=0;
+Color color;
 
-void display(void);                               // declaration de la fonction affichage
-void keyboard(unsigned char touch,int x,int y);     // declaration de la fonction clavier (détecter ce que tape l'utilisateur au clavier)
-void mouse(int button,int state,int x,int y);        // declaration de la fonction souris (détecter où pointe la souris
+void display(void);
+void keyboard(unsigned char touch,int x,int y);
+void mouse(int button,int state,int x,int y);
+void motion(int x,int y);
 
 int main(int argc,char **argv)
 {
-    glutInit(&argc, argv);                                      // fonction glut
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);   // mode d'affichage
-    glutInitWindowSize(800, 800);                               // taille de la fenêtre (largeur, hauteur)
-	glutInitWindowPosition (100, 100);                          // position de la fenêtre sur l'écran (côté gauche, côté haut)
-	glutCreateWindow("Segments");                               // titre**/
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(800, 800);
+	glutInitWindowPosition (100, 100);
+	glutCreateWindow("Segments");
 
-	gluOrtho2D(-400.0,400.0,-400.0,400.0);  // repère à deux dimensions (-x, x, -y, y)
+	color.r=255;
+    color.g=0;
+    color.b=0;
 
-	glClearColor(0.0, 0.0, 0.0, 0.0);       // couleur du fond d'écran (noir)
-	glColor3f(1.0, 0.0, 0.0);               // couleur du tracé (rouge)
-	glPointSize(1.0);                       // taille du point
+	gluOrtho2D(-400.0,400.0,-400.0,400.0);
 
-	glutDisplayFunc(display); // appel de la fonction affichage
-	glutKeyboardFunc(keyboard);  // appel de la fonction clavier
-	glutMouseFunc(mouse);       // appel de la fonction souris
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
+	glPointSize(1.0);
 
-	glutMainLoop();             // fonction de glut pour boucler
+	glutDisplayFunc(display);
+	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glutPassiveMotionFunc(motion);
+	glutMotionFunc(motion);
+
+	glutMainLoop();
 	return 0;
 }
 
-/** fonction de l'affichage**/
 void display(void)
 {
-    if(firstRound)                     // detection pour initialisation les 8 octants
+    if(firstRound)
     {
-        glClear(GL_COLOR_BUFFER_BIT);   // appel de la fonction de glut pour les couleurs
+        glClear(GL_COLOR_BUFFER_BIT);
 
-        glBegin(GL_LINES);              // appel de la fonction de glut pour le tracé des lignes
-            glColor3f(1.0, 1.0, 1.0);   // couleur blanche
-            glVertex2f(-400,0);         // vecteur du tracé -x, 0
-            glVertex2f(400,0);          // vecteur du tracé 0, x
-            glVertex2f(0,-400);         // vecteur du tracé -y, 0
-            glVertex2f(0,400);          // vecteur du tracé 0, y
-            glVertex2f(-400,400);       // vecteur du tracé -x, x => diagonale
-            glVertex2f(400,-400);       // vecteur du tracé x, -x => diagonnale
-            glVertex2f(-400,-400);      // vecteur du tracé -y, y => diagonale
-            glVertex2f(400,400);        // vecteur du tracé y, -y => diagonale
-        glEnd();         // fin de Begin
+        glBegin(GL_LINES);
+        glColor3f(1.0, 1.0, 1.0);
+        glVertex2f(-400,0);
+        glVertex2f(400,0);
+        glVertex2f(0,-400);
+        glVertex2f(0,400);
+        glVertex2f(-400,400);
+        glVertex2f(400,-400);
+        glVertex2f(-400,-400);
+        glVertex2f(400,400);
+        glEnd();
 
-        firstRound=0;   // initialisation du premier tour
+        firstRound=0;
     }
-    else if(click==2)     // détection de deux clics de la souris poour tracer le segment
+    if(redisplay)
     {
-        color.r=1.0;    // rouge
-        color.g=0;      // vert
-        color.b=0;      // bleu
+        for(i=0;i<maxi;i++)
+        {
+            if(shapes[i].type==SEGMENT)
+                segment(shapes[i].xa,shapes[i].ya,shapes[i].xb,shapes[i].yb,shapes[i].color);
+        }
 
-        segment(xa,ya,xb,yb,color);     // appel de la fonction segment
+        redisplay=0;
+    }
+    if(click==2)
+    {
+        segment(xa,ya,xb,yb,color);
+
+        shapes[maxi].color=color;
+        shapes[maxi].type=SEGMENT;
+        shapes[maxi].xa=xa;
+        shapes[maxi].xb=xb;
+        shapes[maxi].ya=ya;
+        shapes[maxi].yb=yb;
+        maxi++;
         click=0;
     }
-    glFlush();      // fonction de l'affichage de glut, très important!!
+    else if(click==1)
+    {
+        segment(xa,ya,xt,yt,color);
+    }
+
+    glFlush();
 }
 
-// fonction de la souris
 void mouse(int button,int state,int x,int y)
 {
-    int x0,y0;  // initialisation de x et y
-
-    // appuie sur le bouton gauche ou non
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{// la souris ne peut se déplacer que dans la fenêtre et un octant
+	{
 		x0 = x - 400;
 		y0 = -y + 400;
 		if(click==0)
-        {// position du curseur toujours en attente sur le premier point
+        {
             xa=x0;
             ya=y0;
+            xt=xa;
+            yt=ya;
             click++;
         }
         else if(click==1)
-        {// position du cuseur en attente du deuxieme point
+        {
             xb=x0;
             yb=y0;
             click++;
         }
-        display();    // appel de la fonction affichage
+		display();
 	}
 }
 
-// fonction du clavier
 void keyboard(unsigned char touch,int x,int y)
 {
     switch(touch)
@@ -102,9 +123,27 @@ void keyboard(unsigned char touch,int x,int y)
         exit(0);
         break;
     case 'r':
+        maxi=0;
         firstRound=1;
-    default:
-        display();
         break;
+    case 'a':
+        redisplay=1;
+        break;
+    }
+    display();
+}
+
+void motion(int x,int y)
+{
+    if(click==1)
+    {
+        x0 = x - 400;
+		y0 = -y + 400;
+
+        xt=x0;
+        yt=y0;
+        firstRound=1;
+        redisplay=1;
+        display();
     }
 }

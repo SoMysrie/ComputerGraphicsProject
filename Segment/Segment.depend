@@ -258,10 +258,20 @@
 	<GL/glut.h>
 	"segment.h"
 
-1415910214 source:c:\users\sophie\documents\github\computergraphicsprojetc\segment\segment.c
+1417506082 source:c:\users\sophie\documents\github\computergraphicsprojetc\segment\segment.c
 	<windows.h>
 	<GL/glut.h>
 	"segment.h"
 
-1414940453 c:\users\sophie\documents\github\computergraphicsprojetc\segment\segment.h
+1417512069 c:\users\sophie\documents\github\computergraphicsprojetc\segment\segment.h
+
+1417512263 source:c:\users\sophie\documents\github\computergraphicsprojetc\segment\main.c
+	"header.h"
+
+1417512816 c:\users\sophie\documents\github\computergraphicsprojetc\segment\header.h
+	<windows.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+	"segment.h"
 
