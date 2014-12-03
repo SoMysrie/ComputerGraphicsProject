@@ -41,7 +41,7 @@ void circle(int xa,int ya,int xb,int yb,Color color,Shape lim)
     glEnd();
 }
 
-int distance(int xa,int ya,int xb,int yb)
+int distance(int xa,int ya,int xb,int yb)                   //calcul de la distance
 {
     double square=(xb-xa)*(xb-xa)+(yb-ya)*(yb-ya);
     int r=0;

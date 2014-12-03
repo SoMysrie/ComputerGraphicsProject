@@ -8,7 +8,7 @@ void square(int xa,int ya,int xb,int yb,Color color,Shape lim)
     segment(xb,ya,xb,yb,color,lim);
 }
 
-int inWindow(int x,int y,Shape lim)
+int inWindow(int x,int y,Shape lim)         //fonction qui verifie si on est dans la fenetre
 {
     int inter;
 
@@ -30,7 +30,7 @@ int inWindow(int x,int y,Shape lim)
     return 0;
 }
 
-void orderSquare(Shape *lim)
+void orderSquare(Shape *lim)            //fonction qui verifie les coins
 {
     int inter;
 
@@ -48,7 +48,7 @@ void orderSquare(Shape *lim)
     }
 }
 
-int plotPoint(int x,int y,Shape lim)
+int plotPoint(int x,int y,Shape lim)        //pour tracer un point que si on est dans la fenetre
 {
     if(inWindow(x,y,lim))
         glVertex2f(x,y);

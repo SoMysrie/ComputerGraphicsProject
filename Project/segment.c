@@ -53,7 +53,7 @@ void segmentOctant1(int xa,int ya,int xb,int yb,int incX,int incY,int reverse,Sh
         plotPoint(xb,yb,lim);
 }
 
-int absolute(int n)
+int absolute(int n)             //valeur absolue necessaire pour le calcul du rayon
 {
     if(n<0)
         return -n;
