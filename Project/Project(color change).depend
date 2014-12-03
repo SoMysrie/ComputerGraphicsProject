@@ -254,3 +254,66 @@
 
 1417510632 c:\users\sophie\documents\github\computergraphicsprojetc\project(color change)\square.h
 
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project(color change)\circle.c
+	"header.h"
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project(color change)\header.h
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<GL/glut.h>
+	"segment.h"
+	"circle.h"
+	"square.h"
+	"color.h"
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project(color change)\segment.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project(color change)\circle.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project(color change)\square.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project(color change)\color.h
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project(color change)\color.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project(color change)\main.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project(color change)\segment.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project(color change)\square.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project\circle.c
+	"header.h"
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project\header.h
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	<GL/glut.h>
+	"segment.h"
+	"circle.h"
+	"square.h"
+	"color.h"
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project\segment.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project\circle.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project\square.h
+
+1417516750 c:\users\sophie\documents\github\computergraphicsproject\project\color.h
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project\color.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project\segment.c
+	"header.h"
+
+1417516750 source:c:\users\sophie\documents\github\computergraphicsproject\project\square.c
+	"header.h"
+

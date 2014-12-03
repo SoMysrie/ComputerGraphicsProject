@@ -32,6 +32,7 @@ void display(void);
 void keyboard(unsigned char touch,int x,int y);
 void mouse(int button,int state,int x,int y);
 void motion(int x,int y);
+void menu(int n);
 
 int main(int argc,char **argv)
 {
@@ -64,6 +65,13 @@ int main(int argc,char **argv)
 	glutMouseFunc(mouse);
 	glutPassiveMotionFunc(motion);
 	glutMotionFunc(motion);
+
+    glutCreateMenu(menu);
+	glutAddMenuEntry("Segment",SEGMENT);
+	glutAddMenuEntry("Cercle",CIRCLE);
+	glutAddMenuEntry("Rectangle",RECTANLGE);
+	glutAddMenuEntry("Fenetrage",WINDOW);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();
 	return 0;
@@ -262,4 +270,10 @@ void motion(int x,int y)
         redisplay=1;
         display();
     }
+}
+
+void menu(int n)
+{
+    if(click==0)
+        type=n;
 }
